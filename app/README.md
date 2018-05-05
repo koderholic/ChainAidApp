@@ -1,31 +1,7 @@
-# Adonis fullstack application
+# ChainAid
 
-This is the fullstack boilerplate for AdonisJs, it comes pre-configured with.
+ChainAid is a blockchain based and enabled application designed to ensure transparency in the delivery of aid either in Financial or Kind format to women that have been internally displaced due to war or crisis situations.
 
-1. Bodyparser
-2. Session
-3. Authentication
-4. Web security middleware
-5. CORS
-6. Edge template engine
-7. Lucid ORM
-8. Migrations and seeds
+This application is the web application designed to allow Aid Givers send aid to the recipients within the system.
 
-## Setup
-
-Use the adonis command to install the blueprint
-
-```bash
-adonis new yardstick
-```
-
-or manually clone the repo and then run `npm install`.
-
-
-### Migrations
-
-Run the following command to run startup migrations.
-
-```js
-adonis migration:run
-```
+The database should be named **chainaid_app**
