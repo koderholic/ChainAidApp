@@ -15,7 +15,6 @@
 
 const Route = use('Route')
 
-
 // Home Routes
 
 Route.on('/').render('login')
@@ -24,9 +23,6 @@ Route.on('/login').render('login')
 
 Route.Post('/login', 'UserController.login').as('login') //store to db
 
+Route.on('/register').render('register').as('signup')
 
-Route.get('/signup', 'UserController.signup').as('signup') 
-
-Route.post('/signup', 'UserController.create').as('create_user') //store to db
-
-
+Route.post('/register', 'UserController.create').as('create_user') //store to db
