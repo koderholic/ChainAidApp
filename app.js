@@ -74,12 +74,17 @@ app.use(session({
   })
 }));
 
+var sessionObj = "";
 /*app.use(function (req, res, next) {
-  if (!req.session.userState) {
-    req.session.userState = "menu";
-  }
-});
-*/
+  sessionObj = req.session;
+    console.log(sessionObj);
+    if (!req.session.userState) {
+      
+    }
+    next();
+  });
+  */
+
 
 /**
  * Primary app routes.
@@ -92,7 +97,33 @@ app.post('/data', userController.postReserve);
 
 app.get("/alldata", userController.getAllReserves);
 
-app.post("/ussd", ussdController.postUssd );
+//app.post("/ussd", ussdController.postUssd );
+
+app.post("/ussd", new AfricasTalking.USSD((params, next) => {
+  let endSession = false;
+  let message = '';
+  
+  console.log(req);
+  //const session = req.session.get(params.sessionId);
+  //const user = db.getUserByPhone(params.phoneNumber);
+
+  if (params.text === '') {
+      message = "Welcome to ChainAid \n";
+      message += "1: Registration \n";
+      message += "2: Collect";
+  }else if (params.text === '1') {
+    message = "Please enter you name \n";
+ }else if (params.text === '2') {
+    message = Math.floor((Math.random() * 100) + 1) +" \n";
+ }
+  next({
+      response: message, 
+      endSession: endSession
+  });
+}));
+
+
+
 
 
 /**
