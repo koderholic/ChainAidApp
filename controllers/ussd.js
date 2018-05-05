@@ -20,10 +20,13 @@ exports.postUssd = new AfricasTalking.USSD((params, next) => {
 
   if (params.text === '') {
       message = "Welcome to ChainAid \n";
-      message += "1: For account info \n";
-      message += "2: For lost gas cylinder";
-
-  }
+      message += "1: Registration \n";
+      message += "2: Collect";
+  }else if (params.text === '1') {
+    message = "Please enter you name \n";
+ }else if (params.text === '2') {
+    message = Math.floor((Math.random() * 100) + 1) +" \n";
+ }
   next({
       response: message, 
       endSession: endSession

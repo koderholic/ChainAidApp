@@ -74,6 +74,12 @@ app.use(session({
   })
 }));
 
+/*app.use(function (req, res, next) {
+  if (!req.session.userState) {
+    req.session.userState = "menu";
+  }
+});
+*/
 
 /**
  * Primary app routes.
