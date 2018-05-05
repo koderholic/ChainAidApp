@@ -9,6 +9,7 @@ var ipfs = ipfsAPI('https://ipfs.infura.io:5001 ')
 
 class USSDController {
     async signup ({ request,response }) {
+
         const validatorRules = {
             first_name: 'string',
             last_name: 'string',
@@ -22,7 +23,7 @@ class USSDController {
             password: 'string'
         }
       
-          const sanitizeRule = {
+        const sanitizeRule = {
             first_name: 'escape, strip_links, capitalize',
             last_name: 'escape, strip_links, capitalize',
             email: 'normalize_email',
@@ -43,8 +44,7 @@ class USSDController {
         response.json({
             success: false,
             data: request.post(),
-            message: validation.messages(),
-            errCode: 'valErr0'
+            message: validation.messages()
         })
         return
         }
@@ -56,6 +56,7 @@ class USSDController {
         //TODO: Saves Recoipients details on the blockchain network
         if (user_type == 'recipient') {
             await ipfs.add(user, (err, ipfsHash) => {
+                console.log(ipfsHash)
                 if (err){
                     response.status(500)
                     response.json({
@@ -63,6 +64,7 @@ class USSDController {
                         data: sanitized,
                         message: 'Sorry! User account could not be created due to server error,please try again'
                     })
+                    return
                 }
                 user.chainaid_hash = ipfsHash
             });
