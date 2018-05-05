@@ -16,3 +16,6 @@
 const Route = use('Route')
 
 Route.on('/').render('welcome')
+
+//USSD Signup Route
+Route.on('/signup-ussd','USSDController.signup')
