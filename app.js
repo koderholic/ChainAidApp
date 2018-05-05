@@ -21,6 +21,7 @@ const options = {
   username: 'sandbox',      // use 'sandbox' for development in the test environment
 };
 const AfricasTalking = require('africastalking')(options);
+const User = require('./models/User');
 
 
 /**
@@ -102,20 +103,80 @@ app.get("/alldata", userController.getAllReserves);
 app.post("/ussd", new AfricasTalking.USSD((params, next) => {
   let endSession = false;
   let message = '';
+  var user;
+  User.findOne({ phoneNumber: params.phoneNumber }, (err, existingUser) => {
+    if (existingUser) {
+      user = existingUser;
+    }
+    
+  });
+
   
   //console.log(req);
   //const session = req.session.get(params.sessionId);
   //const user = db.getUserByPhone(params.phoneNumber);
 
-  if (params.text === '') {
+  if (user) {
+    var state = user.state;
+    
+    
+    if (params.text === '') {
       message = "Welcome to ChainAid \n";
       message += "1: Registration \n";
       message += "2: Collect";
-  }else if (params.text === '1') {
-    message = "Please enter you name \n";
- }else if (params.text === '2') {
-    message = Math.floor((Math.random() * 100) + 1) +" \n";
- }
+      user.state = "menu";
+      user.save((err) => {});
+    }
+    
+    if(state=='menu'){
+      if (params.text === '1') {
+        message = "Please enter your firstname \n"; 
+        user.state = "1a";
+        user.save((err) => {}); 
+      }else if (params.text === '2') {
+        message = "Show this code to the agent" + Math.floor((Math.random() * 100) + 1) +" \n";  
+      }
+    }else if(state=="1a"){
+      message = "Please enter your lastname \n"; 
+      user.first_name = params.text;
+      user.state = "1b";
+      user.save((err) => {}); 
+    }
+    else if(state=="1b"){
+      message = "Are you Male or Female? \n";
+      message += "1: Male \n";
+      message += "2: Female";
+      user.last_name = params.text;
+      user.state = "1c";
+      user.save((err) => {}); 
+    }
+    else if(state=="1c"){
+      if (params.text === '1') {
+        message = "Thanks, you have been registered \n"; 
+        user.gender = "male";
+        user.state = "menu";
+        user.save((err) => {}); 
+      }else if (params.text === '2') {
+        message = "Thanks, you have been registered \n"; 
+        user.gender = "female";
+        user.state = "menu";
+        user.save((err) => {}); 
+      }
+    }
+    
+    
+    
+  }else{
+    const user = new User();
+    user.telephone = params.phoneNumber;
+    user.state = "menu";
+    user.save((err) => {});
+    if (params.text === '') {
+      message = "Welcome to ChainAid \n";
+      message += "1: Registration \n";
+      message += "2: Collect";
+    }
+  }
   next({
       response: message, 
       endSession: endSession

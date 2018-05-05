@@ -3,16 +3,13 @@ const crypto = require('crypto');
 const mongoose = require('mongoose');
 
 const userSchema = new mongoose.Schema({
-  taxid: { type: String, unique: true },
-  companyname: { type: String },
-  rcnumber: { type: String },
-  mainaddress: { type: String },
-  telephoneno1: { type: String },
-  telephoneno2: { type: String },
-  email: { type: String },
-  website: { type: String },
-  natureofbusiness: { type: String },
-  othernatureofbusiness: { type: String }
+  telephone: { type: String, unique: true },
+  sessionId: { type: String },
+  first_name: { type: String },
+  last_name: { type: String },
+  gender: { type: String },
+  user_type: { type: String },
+  state: { type: String }
 
 }, { timestamps: true });
 
