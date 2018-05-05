@@ -103,7 +103,7 @@ app.post("/ussd", new AfricasTalking.USSD((params, next) => {
   let endSession = false;
   let message = '';
   
-  console.log(req);
+  //console.log(req);
   //const session = req.session.get(params.sessionId);
   //const user = db.getUserByPhone(params.phoneNumber);
 
