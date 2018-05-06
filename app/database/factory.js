@@ -27,8 +27,8 @@ const Factory = use('Factory')
 // Fake Users
 Factory.blueprint('App/Models/User', async (faker) => {
   return {
-    first_name: faker.name.firstName,
-    last_name: faker.lastName,
+    first_name: faker.name(),
+    last_name: faker.name(),
     age_range : '0 to 16',
     email: faker.email(),
     gender : faker.random(['Female', 'Male']),
