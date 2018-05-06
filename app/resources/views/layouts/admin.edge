@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+
+   @include('partials.header_info')
+   @include('partials.essential_css')
+
+   {{ css(assetsUrl('css/lib/jquery-flex-label/jquery.flex.label.css')) }}
+   {{ css(assetsUrl('css/custom.css')) }}
+
+</head>
+
+<body class="with-side-menu theme-side-ebony-clay">
+
+	<header class="site-header">
+	    <div class="container-fluid">
+	        <a href="#" class="site-logo"></a> <!-- Project Logo Goes Here -->
+	        <button class="hamburger hamburger--htla">
+	            <span>toggle menu</span>
+	        </button>
+
+           <div class="site-header-content">
+             <div class="site-header-content-in">
+                <div class="site-header-shown">
+                   ChainAid - Providing Transparency in Aid
+                </div><!--.site-header-shown-->
+
+
+                <div class="welcome-message">
+                   @include('partials.section_titles')
+                </div>
+
+             </div><!--site-header-content-in-->
+          </div><!--.site-header-content-->
+
+
+	    </div><!--.container-fluid-->
+	</header><!--.site-header-->
+
+   @include('partials.navigation')
+
+
+	<div class="page-content">
+		<div class="container-fluid">
+			<div class="row">
+            @!section('content')
+			</div><!-- row -->
+		</div><!--.container-fluid-->
+	</div><!--.page-content-->
+
+
+   @include('partials.footer_scripts')
+
+</body>
+</html>

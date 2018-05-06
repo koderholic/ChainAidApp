@@ -18,6 +18,9 @@ const Route = use('Route')
 // Home Routes
 
 Route.on('/').render('login')
+Route.on('/dashboard').render('backend.dashboard').as('dashboard')
+Route.on('/search-results').render('backend.results', ).as('search-results')
+
 
 Route.on('/login').render('login').as('login_page')
 
