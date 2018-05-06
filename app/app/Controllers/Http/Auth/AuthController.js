@@ -29,7 +29,7 @@ class AuthController {
            if ( passwordVerified ) {
               await auth.login(user)
               
-                 return response.route('user_dasboard')
+                 return response.route('dasboard')
   
            }
   

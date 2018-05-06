@@ -18,6 +18,7 @@ const Route = use('Route')
 // Home Routes
 
 Route.on('/').render('login')
+
 Route.on('/dashboard').render('backend.dashboard').as('dashboard')
 Route.on('/search-results').render('backend.results', ).as('search-results')
 
@@ -32,6 +33,8 @@ Route.on('/register').render('register').as('signup')
 
 Route.post('/register', 'UserController.create').as('create_user') //store to db
 
-Route.get('/dashboard', 'UserController.dashboard').middleware('auth').as('user_dasboard')
+// Route.get('/dashboard', 'UserController.dashboard').middleware('auth').as('user_dasboard')
+
+// Route.get('/search-results', 'UserController.search').middleware('auth').as('search')
 
 
