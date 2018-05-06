@@ -1,0 +1,161 @@
+@layout('layouts.admin')
+
+@section('content')
+<div class="col-lg-4 ks-panels-column-section">
+   <section class="card card-purple mb-3">
+      <header class="card-header">
+         Help a Family
+      </header>
+      <div class="card-block">
+         <p class="card-text">
+            <form>
+
+               <h5 class="with-border m-t-md"><strong>Select Aid Type</strong></h5>
+               <div class="form-group">
+                  <select name="aid-type" class="form-control">
+                     <option disabled selected>Select an Option</option>
+                     <option value="Cash">Cash Donation</option>
+                     <option value="Kind">Kind Donation</option>
+                  </select>
+               </div>
+
+               <h5 class="with-border m-t-md"><strong>Define Aid Criteria</strong></h5>
+
+               <div class="form-group">
+                  <label for="aid_type" class="form-label"><strong>Select Recipient's Age Range</strong></label>
+                  <select name="aid-type" class="form-control">
+                     <option disabled selected>Select an Option</option>
+                     <option value="18 - 24">18 - 24</option>
+                     <option value="25 - 34">25 - 34</option>
+                     <option value="35 - 44">35 - 44</option>
+                     <option value="45 - 54">45 - 54</option>
+                     <option value="55 & Above">55 & Above</option>
+                  </select>
+               </div>
+
+               <div class="form-group">
+                  <label for="number_of_children" class="form-label"><strong>Number of Children Recipient Has</strong></label>
+                  <select name="number_of_children" class="form-control">
+                     <option disabled selected>Select an Option</option>
+                     <option value="1">1</option>
+                     <option value="2">2</option>
+                     <option value="3">3</option>
+                     <option value="4">4</option>
+                     <option value="5">5</option>
+                     <option value="6">6</option>
+                     <option value="7">7</option>
+                     <option value="8">8</option>
+                     <option value="9">9</option>
+                     <option value="10">10</option>
+                  </select>
+               </div>
+
+               <div class="form-group">
+                  <label for="number_of_children" class="form-label"><strong>Marital Status of Recipient</strong></label>
+                  <select name="number_of_children" class="form-control">
+                     <option disabled selected>Select an Option</option>
+                     <option value="Single">Single</option>
+                     <option value="Married">Married</option>
+                     <option value="Widow">Widow</option>
+                     <option value="Separated">Separated</option>
+                  </select>
+               </div>
+
+               <div class="form-group">
+                  <button type="button" class="btn btn-lg btn-inline btn-secondary">Search</button>
+               </div>
+
+            </form>
+         </p>
+      </div>
+   </section>
+</div>
+
+
+<div class="col-lg-3 ks-panels-column-section">
+   <section class="card mb-3" style="padding-bottom: 22px; border: solid 1px #ccc;">
+      <header class="card-header">
+         Featured Recipient
+         <a href="#" class="btn btn-success btn-rounded btn-sm pull-right">Donate to Her</a>
+      </header>
+
+      <div class="card-block">
+         <div class="card-text">
+            <h3>Fanna Mohammed</h3>
+            <img src="{{ assetsUrl('img/idp-featured.jpg') }}" class="img-fluid" />
+            <table class="table table-bordered table-hover">
+               <tbody>
+                  <tr>
+                     <td><strong>Location</strong></td>
+                     <td>IDP Camp, Maiduguri</td>
+                  </tr>
+                  <tr>
+                     <td><strong>Age Range</strong></td>
+                     <td>25 - 34</td>
+                  </tr>
+                  <tr>
+                     <td><strong>Marital Status</strong></td>
+                     <td>Widow</td>
+                  </tr>
+                  <tr>
+                     <td><strong>Total No. of Children</strong></td>
+                     <td>5</td>
+                  </tr>
+
+               </tbody>
+            </table>
+         </div>
+      </div>
+   </section>
+</div>
+
+<div class="col-lg-5 ks-panels-column-section">
+   <div class="row">
+      <div class="col-xl-6">
+         <section class="widget widget-simple-sm">
+            <div class="widget-simple-sm-statistic">
+               <div class="number" style="font-size: 3em; padding: 18px">1,426</div>
+            </div>
+            <div class="widget-simple-sm-fill widget-simple-sm-bottom statistic green"><strong>Total Recipients</strong></div>
+         </section><!--.widget-simple-sm-->
+      </div>
+
+      <div class="col-xl-6">
+         <section class="widget widget-simple-sm">
+            <div class="widget-simple-sm-statistic">
+               <div class="number" style="font-size: 3em; padding: 18px">3,982</div>
+            </div>
+            <div class="widget-simple-sm-fill widget-simple-sm-bottom statistic orange"><strong>Total Children</strong></div>
+         </section><!--.widget-simple-sm-->
+      </div>
+
+      <div class="col-xl-6">
+         <section class="widget widget-simple-sm">
+            <div class="widget-simple-sm-statistic">
+               <div class="number" style="font-size: 3em; padding: 18px">16,000</div>
+            </div>
+            <div class="widget-simple-sm-fill widget-simple-sm-bottom statistic grey"><strong>Clothing Items Distributed</strong></div>
+         </section><!--.widget-simple-sm-->
+      </div>
+
+      <div class="col-xl-6">
+         <section class="widget widget-simple-sm">
+            <div class="widget-simple-sm-statistic">
+               <div class="number" style="font-size: 3em; padding: 18px">135,000</div>
+            </div>
+            <div class="widget-simple-sm-fill widget-simple-sm-bottom statistic red"><strong>Books Distributed</strong></div>
+         </section><!--.widget-simple-sm-->
+      </div>
+
+      <div class="col-sm-12">
+         <section class="widget widget-simple-sm-fill green" style="padding-bottom: 22px;">
+            <div class="widget-simple-sm-icon">
+               <i class="fa fa-credit-card"></i>
+            </div>
+            <div class="widget-simple-sm-fill-caption"><span style="font-size:2em">&#8358; 15,000,000</span><br /> <strong>ONLINE MONETARY DONATIONS</strong></div>
+         </section><!--.widget-simple-sm-fill-->
+      </div>
+
+   </div>
+</div>
+@endsection
