@@ -2,26 +2,34 @@
 
 @section('content')
 
-<form class="sign-box">
+<form class="sign-box" action="{{route('create_user')}}" method="post">
+{{ csrfField() }}
+@include('partials.notifications')
    <div class="sign-avatar">
       <img src="img/avatar-sign.png" alt="">
    </div>
    <header class="sign-title">Sign Up</header>
+   {{ elIf('<span class="form_error text-danger">$self</span>', getErrorFor('first_name'), hasErrorFor('first_name')) }}
    <div class="form-group">
       <input type="text" class="form-control" name="first_name" placeholder="First Name"/>
    </div>
+   {{ elIf('<span class="form_error text-danger">$self</span>', getErrorFor('last_name'), hasErrorFor('last_name')) }}
    <div class="form-group">
       <input type="text" class="form-control" name="last_name" placeholder="Last Name"/>
    </div>
+   {{ elIf('<span class="form_error text-danger">$self</span>', getErrorFor('telephone'), hasErrorFor('telephone')) }}
    <div class="form-group">
       <input type="text" class="form-control" name="telephone" placeholder="Mobile Number"/>
    </div>
+   {{ elIf('<span class="form_error text-danger">$self</span>', getErrorFor('email'), hasErrorFor('email')) }}
    <div class="form-group">
       <input type="text" class="form-control" name="email" placeholder="E-Mail"/>
    </div>
+   {{ elIf('<span class="form_error text-danger">$self</span>', getErrorFor('password'), hasErrorFor('password')) }}
    <div class="form-group">
       <input type="password" class="form-control" name="password" placeholder="Password"/>
    </div>
+   {{ elIf('<span class="form_error text-danger">$self</span>', getErrorFor('giver_type'), hasErrorFor('giver_type')) }}
    <div class="form-group">
       <select class="form-control" name="giver_type">
          <option value="Individual">Individual</option>
@@ -30,7 +38,6 @@
          <option value="NGO">NGO</option>
       </select>
    </div>
-   <input type="hidden" name="user_type" value="Giver" />
    <button type="submit" class="btn btn-rounded btn-success sign-up">Sign up</button>
    <p class="sign-note">Already have an account? <a href="/">Sign in</a></p>
    <!--<button type="button" class="close">

@@ -2,13 +2,11 @@
 
 @section('content')
 
-<form class="sign-box" action="{{route('login')}}" method="post">
-{{ csrfField() }}
-@include('partials.notifications')
+<div class="sign-box">
   <div class="sign-avatar">
       <img src="img/avatar-sign.png" alt="">
   </div>
-  <header class="sign-title">Sign In</header>
+  <header class="sign-title">Registration Successful</header>
   <div class="form-group">
       <input type="text" class="form-control" name="email" placeholder="E-Mail"/>
   </div>
@@ -29,6 +27,6 @@
   <!-- <button type="button" class="close">
       <span aria-hidden="true">&times;</span>
   </button> -->
-</form>
+</div>
 
 @endsection

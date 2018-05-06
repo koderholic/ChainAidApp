@@ -19,10 +19,16 @@ const Route = use('Route')
 
 Route.on('/').render('login')
 
-Route.on('/login').render('login')
+Route.on('/login').render('login').as('login_page')
 
-Route.post('/login', 'UserController.login').as('login') //store to db
+Route.get('/logout', 'Auth/AuthController.logout').as('logout') 
+
+Route.post('/login', 'Auth/AuthController.login').as('login') 
 
 Route.on('/register').render('register').as('signup')
 
 Route.post('/register', 'UserController.create').as('create_user') //store to db
+
+Route.get('/dashboard', 'UserController.dashboard').middleware('auth').as('user_dasboard')
+
+
