@@ -16,6 +16,7 @@ class UserSchema extends Schema {
       table.string('telephone').unique()
       table.string('user_type')  //(user_type: 'recipient', 'agent', 'aid_giver', 'admin')
       table.string('password').notNullable()
+      table.string('chainaid_hash')
       table.timestamps()
     })
   }
