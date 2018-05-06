@@ -8,8 +8,7 @@
       </header>
       <div class="card-block">
          <p class="card-text">
-            <form>
-
+            <form action="" method="post">
                <h5 class="with-border m-t-md"><strong>Select Aid Type</strong></h5>
                <div class="form-group">
                   <select name="aid-type" class="form-control">
@@ -62,7 +61,8 @@
                </div>
 
                <div class="form-group">
-                  <button type="button" class="btn btn-lg btn-inline btn-secondary">Search</button>
+                  {{-- <button type="button" class="btn btn-lg btn-inline btn-secondary">Search</button> --}}
+                  <a href="{{ route('search-results') }}" class="btn btn-lg btn-inline btn-secondary">Search</a>
                </div>
 
             </form>
