@@ -2,10 +2,12 @@
 
 //Module dependencies
 const User = use('App/Models/User')
+const AidProvision = use('App/Models/AidProvision')
 const Hash = use('Hash')
+const { sanitize, validate } = use('Validator')
 //IPFS API
-var ipfsAPI = require('ipfs-api')
-var ipfs = ipfsAPI('https://ipfs.infura.io:5001 ')
+var IPFS  = require('ipfs-mini')
+var ipfs = new IPFS({host: '127.0.0.1', port: '5001', protocol: 'http'})
 
 class USSDController {
     async signup ({ request,response }) {
@@ -13,11 +15,11 @@ class USSDController {
         const validatorRules = {
             first_name: 'string',
             last_name: 'string',
-            email: 'email|unique:users',
+            email: 'email',
             no_of_children: 'number',
             age_range: 'string',
             marital_status: 'string',
-            telephone: 'string',
+            telephone: 'string|unique:users',
             gender: 'string',
             user_type: 'string',
             password: 'string'
@@ -51,11 +53,11 @@ class USSDController {
 
         //Initialize user object
         const user = new User()
-        object.assign(user,sanitized)
+        Object.assign(user,sanitized)
 
         //TODO: Saves Recoipients details on the blockchain network
-        if (user_type == 'recipient') {
-            await ipfs.add(user, (err, ipfsHash) => {
+        if (sanitized.user_type == 'recipient') {
+            await ipfs.addJSON(user, (err, ipfsHash) => {
                 console.log(ipfsHash)
                 if (err){
                     response.status(500)
@@ -73,7 +75,7 @@ class USSDController {
         //Save user to db
         const savedUser = await user.save()
 
-        if (!saveduser){
+        if (!savedUser){
             response.status(500)
             response.json({
                 ok: false,
@@ -89,6 +91,61 @@ class USSDController {
             message: 'User account created successfully'
         })
     }
+
+    async account ({ request, response }){
+        const validatorRules = {
+            telephone: 'string'
+        }
+
+        const sanitizeRule = {
+            telephone: 'escape, strip_links'
+        }
+      
+        const validation = await validate(request.all(), validatorRules)
+        const sanitized = await sanitize(request.all(), sanitizeRule)
+    
+        if (validation.fails()) {
+        response.status(400)
+        response.json({
+            success: false,
+            data: request.post(),
+            message: validation.messages()
+        })
+        return
+        }
+
+        //Serch the user table if the recipient exist using unique telephone number
+        const recipient = await User.findBy({ telephone: sanitized.telephone })
+        console.log('recipient', recipient)
+        if (!recipient) {
+            response.status(403)
+            response.json({
+                success: false,
+                data: request.post(),
+                message: 'Sorry, you do not have an asccount with us'
+            })
+            return
+        }
+
+        //Checks the Aid provision table with the recipient id for yet to be collected provisions
+        const recipientAccount = await AidProvision.query().where({ recipient_id: recipient.id, received_status: 0 }).fetch()
+        console.log('recipientAccount', recipientAccount)
+        if (recipientAccount.rows.length == 0) {
+            response.status(200)
+            response.json({
+                success: false,
+                data: request.post(),
+                message: 'There is no provision at this time'
+            })
+            return
+        }
+
+        response.status(200)
+        response.json({
+            success: true,
+            data: recipientAccount
+        })
+    }
 }
 
-module.exports = UssdController
+module.exports = USSDController
